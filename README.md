@@ -1,5 +1,7 @@
 # iwlwifilar-fedora-patched for Fedora
 
+**fork from [iwlwifi-lar-patched](https://github.com/TenkyuChimata/iwlwifi-lar-patched)** 
+
 Patched Intel **iwlwifi** driver modules with **LAR (Location Aware Regulatory) disabled** for Fedora Linux.
 
 This package allows manual control of your Wi-Fi regulatory domain (`iw reg set`), unlocking additional Wi-Fi channels (2.4GHz channels 12-14, 5GHz, 6GHz) and higher transmission power (up to 30 dBm).
