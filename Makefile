@@ -24,7 +24,7 @@ clean:
 	rm -rf build .cache
 
 help:
-	@echo "iwlwifi-lar-patched for Fedora Makefile targets:"
+	@echo "iwlwifilar-fedora-patched for Fedora Makefile targets:"
 	@echo "  make              - Build modules for currently running kernel"
 	@echo "  make build-all    - Build modules for all installed kernel-devel versions"
 	@echo "  sudo make install - Install & sign modules for currently running kernel"

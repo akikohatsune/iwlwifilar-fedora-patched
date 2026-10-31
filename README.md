@@ -1,4 +1,4 @@
-# iwlwifi-lar-patched for Fedora
+# iwlwifilar-fedora-patched for Fedora
 
 Patched Intel **iwlwifi** driver modules with **LAR (Location Aware Regulatory) disabled** for Fedora Linux.
 

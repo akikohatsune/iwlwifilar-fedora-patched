@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# iwlwifi-lar-patched uninstall script for Fedora Linux
+# iwlwifilar-fedora-patched uninstall script for Fedora Linux
 
 die() {
     echo "ERROR: $*" >&2
@@ -60,11 +60,11 @@ done
 
 if [[ "${UNINSTALL_ALL}" == true ]]; then
     for kd in /usr/lib/modules/*; do
-        if [[ -d "${kd}/updates/iwlwifi-lar-patched" ]]; then
+        if [[ -d "${kd}/updates/iwlwifilar-fedora-patched" ]]; then
             TARGET_KERNELS+=("$(basename "${kd}")")
         fi
     done
-    [[ ${#TARGET_KERNELS[@]} -gt 0 ]] || info "No iwlwifi-lar-patched installations found."
+    [[ ${#TARGET_KERNELS[@]} -gt 0 ]] || info "No iwlwifilar-fedora-patched installations found."
 fi
 
 if [[ ${#TARGET_KERNELS[@]} -eq 0 ]]; then
@@ -73,15 +73,14 @@ if [[ ${#TARGET_KERNELS[@]} -eq 0 ]]; then
 fi
 
 for kver in "${TARGET_KERNELS[@]}"; do
-    mod_dir="/usr/lib/modules/${kver}/updates/iwlwifi-lar-patched"
-    if [[ -d "${mod_dir}" ]]; then
-        info "Removing patched modules from ${mod_dir}..."
-        rm -rf "${mod_dir}"
-        # If updates directory is now empty, remove it
-        rmdir "/usr/lib/modules/${kver}/updates" 2>/dev/null || true
-    else
-        info "No patched modules found in ${mod_dir}"
-    fi
+    for dir_name in iwlwifilar-fedora-patched iwlwifi-lar-patched; do
+        mod_dir="/usr/lib/modules/${kver}/updates/${dir_name}"
+        if [[ -d "${mod_dir}" ]]; then
+            info "Removing patched modules from ${mod_dir}..."
+            rm -rf "${mod_dir}"
+        fi
+    done
+    rmdir "/usr/lib/modules/${kver}/updates" 2>/dev/null || true
 
     info "Updating module dependencies (depmod -a ${kver})..."
     depmod -a "${kver}"
@@ -92,8 +91,8 @@ for kver in "${TARGET_KERNELS[@]}"; do
     fi
 done
 
-# Check if any remaining kernels still have iwlwifi-lar-patched
-REMAINING_PATCHED=$(find /usr/lib/modules/*/updates/iwlwifi-lar-patched -maxdepth 0 2>/dev/null || true)
+# Check if any remaining kernels still have iwlwifilar-fedora-patched
+REMAINING_PATCHED=$(find /usr/lib/modules/*/updates/iwlwifilar-fedora-patched -maxdepth 0 2>/dev/null || true)
 if [[ -z "${REMAINING_PATCHED}" ]]; then
     info "Removing configuration files..."
     rm -f /etc/modprobe.d/iwlwifi-lar.conf
@@ -102,6 +101,6 @@ if [[ -z "${REMAINING_PATCHED}" ]]; then
 fi
 
 echo ""
-info "iwlwifi-lar-patched has been removed. Original in-tree kernel drivers are restored."
+info "iwlwifilar-fedora-patched has been removed. Original in-tree kernel drivers are restored."
 info "Reboot is recommended: sudo reboot"
 

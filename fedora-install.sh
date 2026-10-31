@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# iwlwifi-lar-patched install script for Fedora Linux
+# iwlwifilar-fedora-patched install script for Fedora Linux
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="${SCRIPT_DIR}/build"
@@ -145,7 +145,10 @@ NEED_MOK_ENROLL_REMINDER=false
 install_for_kernel() {
     local kver="$1"
     local mod_src_dir="${BUILD_DIR}/${kver}/modules"
-    local mod_dst_dir="/usr/lib/modules/${kver}/updates/iwlwifi-lar-patched"
+    local mod_dst_dir="/usr/lib/modules/${kver}/updates/iwlwifilar-fedora-patched"
+
+    # Remove any old directory from previous naming
+    rm -rf "/usr/lib/modules/${kver}/updates/iwlwifi-lar-patched"
 
     info "=========================================="
     info "Installing for Fedora kernel: ${kver}"
@@ -242,7 +245,7 @@ done
 
 echo ""
 info "================================================================"
-info " iwlwifi-lar-patched is installed successfully on Fedora!"
+info " iwlwifilar-fedora-patched is installed successfully on Fedora!"
 info "================================================================"
 
 if [[ "${NEED_MOK_ENROLL_REMINDER}" == true ]]; then

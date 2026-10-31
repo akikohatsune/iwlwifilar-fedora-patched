@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# iwlwifi-lar-patched build script for Fedora Linux
+# iwlwifilar-fedora-patched build script for Fedora Linux
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PATCH_FILE="${SCRIPT_DIR}/0001-iwlwifi-add-lar_disable.patch"
